@@ -1,0 +1,74 @@
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+  <head>
+  	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+  	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="352570768744-74p86drs21v3nahh7qjh7vn792lp4vrj.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '352570768744-74p86drs21v3nahh7qjh7vn792lp4vrj.apps.googleusercontent.com',
+          // Scopes to request in addition to 'profile' and 'email'
+          //scope: 'additional_scope'
+        });
+      });
+    }
+  </script>
+  </head>
+<body>
+		<div class = "item-pane">
+			<div class = "item-form-pane">
+		<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+    <button id="signinButton">Google Signin</button>
+
+    <div id="result"></div>
+
+    <script>
+      $('#signinButton').click(function () {
+        function signInCallback(authResult) {
+          if (authResult['code']) {
+            $('#signinButton').attr('style', 'display:none');
+            $.ajax({
+              type: 'POST',
+              url: '/gconnect?state={{STATE}}',
+              processData: false,
+              data: authResult['code'],
+              contentType: 'application/octet-stream; charset=utf-8',
+              success: function (result) {
+                if (result) {
+                  $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...');
+                  setTimeout(function () {
+                    window.location.href = "/";
+                  }, 4000);
+                } else if (authResult['error']) {
+                  console.log('There was an error: ' + authResult['error']);
+                } else {
+                  $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                }
+              }
+            });
+          }
+        }
+        auth2.grantOfflineAccess().then(signInCallback);
+      })
+    </script>
+</body>
+</html>

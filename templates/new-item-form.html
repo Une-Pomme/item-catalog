@@ -1,0 +1,27 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<div id="wrapper">
+	{% include "header.html" %}
+
+		<form id="itemform" action="" method = "post">
+		<label for="item-name">Name this Item</label><br/>
+		<input type="text" name="item-name" value="" required><br/>
+		<label for="item-description">Write a Description of this Item</label><br/>
+		<textarea id="item-description" name="item-description" form="itemform" maxlength="250"></textarea><br/>
+		<label for="categories-list">Select a Category</label><br/>
+		<select name="categories-list">
+			{% for c in categories %}
+
+			<option value="{{c.id}}">{{c.name}}</option>
+			{% endfor %}
+		</select><br/>
+		<input type="submit">
+		</form>
+
+	</div>
+	</div>
+</body>
+</html>

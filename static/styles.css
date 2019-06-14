@@ -1,0 +1,46 @@
+body{
+	background-color: rgb(173, 171, 206);
+}
+#wrapper{
+	margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    border: 1px solid #bfbdbd;
+    padding: 10px;
+    background-color: white;
+}
+.categories-pane{
+	margin-right: 20px;
+}
+.latest-items-pane{
+	margin-left: 15px;
+}
+#content{
+	display: flex;
+}
+#app-name {
+ 	font-size:3em;
+}
+textarea#item-description{
+	width:500px;
+}
+a:link#app-name    {
+  /* Applies to all unvisited links */
+  text-decoration:  none;
+  color: rgb(25, 41, 70);
+  } 
+a:visited#app-name  {
+  /* Applies to all visited links */
+  text-decoration:  none;
+  color: rgb(25, 41, 70);;
+  } 
+a:hover#app-name    {
+  /* Applies to links under the pointer */
+  text-decoration:  none;
+  color: rgb(25, 41, 70);;
+  } 
+a:active#app-name   {
+  /* Applies to activated links */
+  text-decoration:  none;
+  color: rgb(25, 41, 70);;
+  } 

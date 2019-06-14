@@ -1,0 +1,30 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<div id="wrapper">
+	{% include "header.html" %}
+		
+		<form id="itemform" action="" method = "post">
+		<label for="item-name">Item Name</label><br/>
+		<input type="text" name="item-name" value="{{item.name}}"><br/>
+		<label for="item-description">Description</label><br/>
+		<textarea id="item-description" name="item-description" form="itemform" maxlength="250">{{item.description}}</textarea><br/>
+		<label for="categories-list">Category</label><br/>
+		<select name="categories-list">
+			{% for c in categories %}
+
+			<option value="{{c.id}}" 
+			{% if c.id == item.category_id%} selected {% endif %}
+			>{{c.name}}</option>
+			{% endfor %}
+		</select><br/>
+		<input class=".btn" type="submit">
+		</form>
+
+	</div>
+</div>
+	
+</body>
+</html>

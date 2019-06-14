@@ -1,0 +1,24 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+	<div id="wrapper">
+	{% include "header.html" %}
+	<div id="content">
+	<div class="categories-pane">
+		{% for c in categories %}
+		 <a href='{{url_for('displayCategoryItems', category_name = c.name ) }}' class="categories-link">{{c.name}}</a><br/>
+		{% endfor %}
+	</div>
+	
+	<div class="catalog-items">
+		<h2>{{category_name}} Items</h2>
+		{% for i in items %}
+		 <a href='{{url_for('displaySpecificItem', category_name= category_name, item_name =i.name, item_id =i.id )}}' class="items-link">{{i.name}}</a><br/>
+		{% endfor %}
+	</div>
+</div>
+	</div>
+</body>
+</html>
